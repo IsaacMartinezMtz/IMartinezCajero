@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CajeroModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CajeroSaldo">
+          <Key>
+            <PropertyRef Name="IdBillete" />
+          </Key>
+          <Property Name="IdBillete" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denominacion" Type="int" Nullable="false" />
+          <Property Name="CantidadBilletes" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CuentaSaldo">
+          <Key>
+            <PropertyRef Name="IdCuentaSaldo" />
+          </Key>
+          <Property Name="IdCuentaSaldo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeroCuenta" Type="int" />
+          <Property Name="SaldoActual" Type="int" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="NoCuenta" />
+          </Key>
+          <Property Name="NoCuenta" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Nip" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__CuentaSal__Numer__1273C1CD">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="CuentaSaldo" Type="Self.CuentaSaldo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="NoCuenta" />
+            </Principal>
+            <Dependent Role="CuentaSaldo">
+              <PropertyRef Name="NumeroCuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetALLCajero" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetCuenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NoCuenta" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetCuentaTranferir" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NumeroCuentaReceptora" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetSaldo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NumeroCuenta" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SaldoTotalCajero" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Transferencia" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NumeroCuentaEmisora" Type="int" Mode="In" />
+          <Parameter Name="NumeroCuentaReceptora" Type="int" Mode="In" />
+          <Parameter Name="SaldoEmisor" Type="int" Mode="In" />
+          <Parameter Name="SaldoReceptor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateSaldoCajero" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdBillete" Type="int" Mode="In" />
+          <Parameter Name="CantidadBilletes" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateSaldoCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NumeroCuenta" Type="int" Mode="In" />
+          <Parameter Name="SaldoActual" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="CajeroModelStoreContainer">
+          <EntitySet Name="CajeroSaldo" EntityType="Self.CajeroSaldo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CuentaSaldo" EntityType="Self.CuentaSaldo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CuentaSal__Numer__1273C1CD" Association="Self.FK__CuentaSal__Numer__1273C1CD">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="CuentaSaldo" EntitySet="CuentaSaldo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CajeroModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CajeroSaldo">
+          <Key>
+            <PropertyRef Name="IdBillete" />
+          </Key>
+          <Property Name="IdBillete" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Denominacion" Type="Int32" Nullable="false" />
+          <Property Name="CantidadBilletes" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CuentaSaldo">
+          <Key>
+            <PropertyRef Name="IdCuentaSaldo" />
+          </Key>
+          <Property Name="IdCuentaSaldo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroCuenta" Type="Int32" />
+          <Property Name="SaldoActual" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__CuentaSal__Numer__1273C1CD" FromRole="CuentaSaldo" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="NoCuenta" />
+          </Key>
+          <Property Name="NoCuenta" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nip" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CuentaSaldoes" Relationship="Self.FK__CuentaSal__Numer__1273C1CD" FromRole="Usuario" ToRole="CuentaSaldo" />
+        </EntityType>
+        <Association Name="FK__CuentaSal__Numer__1273C1CD">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="CuentaSaldo" Type="Self.CuentaSaldo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="NoCuenta" />
+            </Principal>
+            <Dependent Role="CuentaSaldo">
+              <PropertyRef Name="NumeroCuenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CajeroEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CajeroSaldoes" EntityType="Self.CajeroSaldo" />
+          <EntitySet Name="CuentaSaldoes" EntityType="Self.CuentaSaldo" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK__CuentaSal__Numer__1273C1CD" Association="Self.FK__CuentaSal__Numer__1273C1CD">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="CuentaSaldo" EntitySet="CuentaSaldoes" />
+          </AssociationSet>
+          <FunctionImport Name="GetSaldo" ReturnType="Collection(CajeroModel.GetSaldo_Result)">
+          <Parameter Name="NumeroCuenta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetCuenta" ReturnType="Collection(CajeroModel.GetCuenta_Result)">
+          <Parameter Name="NoCuenta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SaldoTotalCajero" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="GetALLCajero" ReturnType="Collection(CajeroModel.GetALLCajero_Result)" />
+          <FunctionImport Name="UpdateSaldoCajero">
+            <Parameter Name="IdBillete" Mode="In" Type="Int32" />
+            <Parameter Name="CantidadBilletes" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateSaldoCliente">
+            <Parameter Name="NumeroCuenta" Mode="In" Type="Int32" />
+            <Parameter Name="SaldoActual" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetCuentaTranferir" ReturnType="Collection(CajeroModel.GetCuentaTranferir_Result)">
+          <Parameter Name="NumeroCuentaReceptora" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Transferencia">
+            <Parameter Name="NumeroCuentaEmisora" Mode="In" Type="Int32" />
+            <Parameter Name="NumeroCuentaReceptora" Mode="In" Type="Int32" />
+            <Parameter Name="SaldoEmisor" Mode="In" Type="Int32" />
+            <Parameter Name="SaldoReceptor" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetSaldo_Result">
+          <Property Type="Int32" Name="IdCuentaSaldo" Nullable="false" />
+          <Property Type="Int32" Name="NumeroCuenta" Nullable="true" />
+          <Property Type="Int32" Name="SaldoActual" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="80" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="80" />
+        </ComplexType>
+        <ComplexType Name="GetCuenta_Result">
+          <Property Type="Int32" Name="NoCuenta" Nullable="false" />
+          <Property Type="Int32" Name="Nip" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="80" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="80" />
+        </ComplexType>
+        <ComplexType Name="GetALLCajero_Result">
+          <Property Type="Int32" Name="IdBillete" Nullable="false" />
+          <Property Type="Int32" Name="Denominacion" Nullable="false" />
+          <Property Type="Int32" Name="CantidadBilletes" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetCuentaTranferir_Result">
+          <Property Type="Int32" Name="NumeroCuenta" Nullable="true" />
+          <Property Type="Int32" Name="SaldoActual" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CajeroModelStoreContainer" CdmEntityContainer="CajeroEntities">
+          <EntitySetMapping Name="CajeroSaldoes">
+            <EntityTypeMapping TypeName="CajeroModel.CajeroSaldo">
+              <MappingFragment StoreEntitySet="CajeroSaldo">
+                <ScalarProperty Name="IdBillete" ColumnName="IdBillete" />
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+                <ScalarProperty Name="CantidadBilletes" ColumnName="CantidadBilletes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CuentaSaldoes">
+            <EntityTypeMapping TypeName="CajeroModel.CuentaSaldo">
+              <MappingFragment StoreEntitySet="CuentaSaldo">
+                <ScalarProperty Name="IdCuentaSaldo" ColumnName="IdCuentaSaldo" />
+                <ScalarProperty Name="NumeroCuenta" ColumnName="NumeroCuenta" />
+                <ScalarProperty Name="SaldoActual" ColumnName="SaldoActual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="CajeroModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="NoCuenta" ColumnName="NoCuenta" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="Nip" ColumnName="Nip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetSaldo" FunctionName="CajeroModel.Store.GetSaldo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CajeroModel.GetSaldo_Result">
+                <ScalarProperty Name="IdCuentaSaldo" ColumnName="IdCuentaSaldo" />
+                <ScalarProperty Name="NumeroCuenta" ColumnName="NumeroCuenta" />
+                <ScalarProperty Name="SaldoActual" ColumnName="SaldoActual" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCuenta" FunctionName="CajeroModel.Store.GetCuenta">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CajeroModel.GetCuenta_Result">
+                <ScalarProperty Name="NoCuenta" ColumnName="NoCuenta" />
+                <ScalarProperty Name="Nip" ColumnName="Nip" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SaldoTotalCajero" FunctionName="CajeroModel.Store.SaldoTotalCajero" />
+          <FunctionImportMapping FunctionImportName="GetALLCajero" FunctionName="CajeroModel.Store.GetALLCajero">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CajeroModel.GetALLCajero_Result">
+                <ScalarProperty Name="IdBillete" ColumnName="IdBillete" />
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+                <ScalarProperty Name="CantidadBilletes" ColumnName="CantidadBilletes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateSaldoCajero" FunctionName="CajeroModel.Store.UpdateSaldoCajero" />
+          <FunctionImportMapping FunctionImportName="UpdateSaldoCliente" FunctionName="CajeroModel.Store.UpdateSaldoCliente" />
+          <FunctionImportMapping FunctionImportName="GetCuentaTranferir" FunctionName="CajeroModel.Store.GetCuentaTranferir">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CajeroModel.GetCuentaTranferir_Result">
+                <ScalarProperty Name="NumeroCuenta" ColumnName="NumeroCuenta" />
+                <ScalarProperty Name="SaldoActual" ColumnName="SaldoActual" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Transferencia" FunctionName="CajeroModel.Store.Transferencia" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

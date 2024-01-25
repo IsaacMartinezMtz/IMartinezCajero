@@ -1,0 +1,51 @@
+﻿@model ML.Contadores
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    .formulario {
+        width: 300px;
+        padding: 16px;
+        background-color: #f1f1f1;
+        margin: 0 auto;
+        box-shadow: 0 0 20px 0 rgba(0,0,0,0.2), 0 5px 5px 0 rgba(0,0,0,0.24);
+    }
+
+        .formulario input[type=text] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            border: none;
+            background: #f1f1f1;
+        }
+
+        .formulario button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+            .formulario button:hover {
+                opacity: 1;
+            }
+</style>
+
+<h2>Ingreso de saldo</h2>
+<body>
+
+    <div class="formulario">
+        <form action="/Retiro/Form" method="post">
+            <label for="Retiro"><b>Cantidad a retirar</b></label>
+            <input type="text" placeholder="Ingresa la cantidad" name="Retiro" required>
+            <button type="submit" class="btn btn-primary">Retirar</button>
+        </form>
+    </div>
+
+</body>

@@ -1,0 +1,78 @@
+﻿@model ML.CuentaSaldo
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .balance-container {
+        width: 300px;
+        border: 1px solid #000;
+        padding: 20px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+        .balance-container h2 {
+            margin: 0 0 10px;
+        }
+
+        .balance-container p {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    .boton {
+        font-size: 20px;
+        padding: 10px 24px;
+        cursor: pointer;
+        color: white;
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .boton:hover {
+        background-color: #45a049;
+    }
+    #botones {
+        margin-top: 50px;
+        margin-left: 405px;
+    }
+    a {
+        text-decoration: none;
+    }
+
+</style>
+<div class="text-lg-start">
+    <h2>Bienvenido</h2>
+    <h5>@Model.Cuenta.Nombre</h5>
+</div>
+<hr />
+<body>
+    <div class="balance-container">
+        <h2>Saldo Actual</h2>
+        <p>$@Model.SaldoActual</p>
+    </div>
+
+    <div id="botones">
+        <a class="boton" href="@Url.Action("Form", "Transferir")">
+            <i class="fas fa-exchange-alt"></i>
+            Tranferir
+        </a>
+
+        <a class="boton" href="@Url.Action("Form", "Retiro")">
+            <i class="fas fa-money-bill-wave"></i>
+            Retiro
+        </a>
+    </div>
+    
+
+</body>
+
+
+
